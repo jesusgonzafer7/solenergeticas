@@ -1,6 +1,6 @@
-export interface FAQ {
-    question: string;
-    answer: string;
+export type FAQ = {
+    question: string
+    answer: string
 }
 
 export const faqs: FAQ[] = [

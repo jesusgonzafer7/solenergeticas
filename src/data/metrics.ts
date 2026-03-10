@@ -1,6 +1,6 @@
-export interface Metric {
-    label: string;
-    value: string;
+export type Metric = {
+    label: string
+    value: string
 }
 
 export const metrics: Metric[] = [

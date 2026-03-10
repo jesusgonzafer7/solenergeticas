@@ -1,7 +1,7 @@
-export interface Collaborator {
-    id: number;
-    name: string;
-    description: string;
+export type Collaborator = {
+    id: number
+    name: string
+    description: string
 }
 
 export const collaborators: Collaborator[] = [

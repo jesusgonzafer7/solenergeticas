@@ -1,3 +1,5 @@
+import Button from "@/components/ui/Button";
+
 export default function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-24">
@@ -7,6 +9,8 @@ export default function Home() {
             <p className="mt-4 text-lg text-center text-gray-600">
                 Soluciones de energía solar para un futuro sostenible
             </p>
+            <Button>El booton
+                </Button>
         </main>
     );
 }

@@ -1,33 +1,41 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "../styles/globals.css";
+import Footer from "@/components/layout/Footer";
 
 const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+    /* Se vincula la fuente a la variable definida en la configuracion */
+    variable: "--font-primary",
     subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
     title: "SolEnergéticas",
-    description: "Soluciones de energía solar para un futuro sostenible",
+    description: "Soluciones de energía solar",
 };
 
 export default function RootLayout({
     children,
-}: Readonly<{
+}: {
     children: React.ReactNode;
-}>) {
+}) {
     return (
         <html lang="es">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`
+          ${geistSans.variable} 
+          antialiased 
+          /* Flexbox para empujar el footer al final de la pagina */
+          min-h-screen 
+          flex 
+          flex-col
+        `}
             >
-                {children}
+                {/* El main crece para ocupar el espacio disponible */}
+                <main className="flex-grow">
+                    {children}
+                </main>
+                <Footer />
             </body>
         </html>
     );

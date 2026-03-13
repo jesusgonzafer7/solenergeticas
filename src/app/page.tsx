@@ -10,7 +10,7 @@ export default function Home() {
                 Soluciones de energía solar para un futuro sostenible
             </p>
             <Button>El booton
-                </Button>
+            </Button>
         </main>
     );
 }

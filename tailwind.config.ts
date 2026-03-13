@@ -9,25 +9,33 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            /* Mapeo de variables CSS definidas en globals.css */
+            /* Mapeo de colores sincronizado con globals.css */
             colors: {
                 primary: "var(--color-primary)",
                 accent: "var(--color-accent)",
                 light: "var(--color-light)",
+                white: "var(--color-white)",
                 background: "var(--color-background)",
                 surface: "var(--color-surface)",
                 text: "var(--color-text)",
                 muted: "var(--color-text-light)",
                 border: "var(--color-border)",
             },
+            /* Mapeo de bordes */
             borderRadius: {
                 sm: "var(--radius-sm)",
                 md: "var(--radius-md)",
                 lg: "var(--radius-lg)",
             },
+            /* Mapeo de sombras (esto te faltaba) */
+            boxShadow: {
+                sm: "var(--shadow-sm)",
+                md: "var(--shadow-md)",
+            },
             fontFamily: {
                 /* Se asigna la variable de fuente de Next.js como fuente principal */
                 sans: ["var(--font-primary)", "ui-sans-serif", "system-ui"],
+                mono: ["var(--font-mono)", "ui-monospace", "monospace"],
             },
         },
     },

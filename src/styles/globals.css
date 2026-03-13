@@ -15,6 +15,7 @@
   --color-primary: var(--color-primary);
   --color-accent: var(--color-accent);
   --color-light: var(--color-light);
+  --color-white: var(--color-white);
   --color-background: var(--color-background);
   --color-surface: var(--color-surface);
   --color-text: var(--color-text);
@@ -44,6 +45,7 @@
   --color-primary: #272A64;
   --color-accent: #316BDB;
   --color-light: #809BCF;
+  --color-white: #FFFFFF;
 
   /* Colores de soporte para la interfaz */
   --color-background: #ffffff;

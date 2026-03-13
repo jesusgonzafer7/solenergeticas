@@ -4,7 +4,7 @@ import { FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 export default function Footer() {
     return (
         // Footer principal: ancho completo, fondo azul (bg-accent), texto claro (text-light), se coloca al final de la página (mt-auto)
-        <footer className="w-full bg-accent text-light mt-auto">
+        <footer className="w-full bg-accent text-white mt-auto">
             <div className="max-w-7xl mx-auto px-6 py-10">
 
                 {/* Top footer: flex vertical en móvil, horizontal en desktop, con espacio entre bloques */}

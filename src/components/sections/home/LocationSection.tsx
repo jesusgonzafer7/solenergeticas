@@ -1,7 +1,7 @@
 import Section from "@/components/ui/Section";
 import Container from "@/components/layout/Container";
 
-export default function Location() {
+export default function LocationSection() {
     return (
         <Section className="bg-gray-50">
             <Container>

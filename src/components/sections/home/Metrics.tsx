@@ -4,7 +4,7 @@ import { metrics } from "@/data/metrics";
 
 export default function Metrics() {
     return (
-        <Section className="bg-green-600">
+        <Section className="bg-primary">
             <Container>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     {metrics.map((metric) => (

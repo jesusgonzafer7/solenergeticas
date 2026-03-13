@@ -4,7 +4,7 @@ import Container from "@/components/layout/Container";
 
 export default function Hero() {
     return (
-        <Section className="bg-gradient-to-br from-green-50 to-white">
+        <Section className="bg-linear-to-br from-green-50 to-white">
             <Container>
                 <div className="flex flex-col items-center text-center gap-6 py-12">
                     <h2 className="text-5xl font-extrabold text-gray-900 leading-tight">

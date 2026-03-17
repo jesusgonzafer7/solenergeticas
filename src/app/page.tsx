@@ -3,35 +3,35 @@ import HeroCarousel from "@/components/sections/home/HeroCarousel";
 import LocationSection from "@/components/sections/home/LocationSection";
 import Metrics from "@/components/sections/home/Metrics";
 import Testimonials from "@/components/sections/home/Testimonials";
+import TarifaComparison from "@/components/ui/TarifaGrafica"; // El bloque nuevo
 import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
+import Link from "next/link";
 
 export default function Home() {
     return (
-        <main className="relative min-h-screen">
-            {/* 1. Título y Bienvenida */}
+        <main className="relative min-h-screen bg-white">
             <Hero />
+            <HeroCarousel />
 
-            {/* 2. Bloque del Carrusel */}
-            <div className="relative w-full">
-                <HeroCarousel />
-            </div>
-
-            {/* 3. Bloque de Botones */}
-            <div className="py-10 bg-white">
+            {/* Bloque de Botones */}
+            <div className="py-10">
                 <Container>
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-                        <Button size="lg" className="px-12 w-full sm:w-auto shadow-xl">
-                            Solicitar presupuesto
-                        </Button>
-                        <Button size="lg" variant="outline" className="px-12 w-full sm:w-auto">
-                            Conocer más
-                        </Button>
+                        <Link href="/contacto" className="w-full sm:w-auto">
+                            <Button size="lg" className="px-12 w-full shadow-xl">Solicitar presupuesto</Button>
+                        </Link>
+                        <Link href="/sobre-nosotros" className="w-full sm:w-auto">
+                            <Button size="lg" variant="outline" className="px-12 w-full">Conocer más</Button>
+                        </Link>
                     </div>
                 </Container>
             </div>
 
-            {/* 4. Resto de secciones */}
+            {/* Los cuadros azules de la imagen */}
+            <TarifaComparison />
+
+            {/* Estas secciones ahora volverán a verse bien gracias al Section.tsx recuperado */}
             <Testimonials />
             <Metrics />
             <LocationSection />

@@ -1,10 +1,9 @@
-// src/components/sections/home/Hero.tsx
-import Section from "@/components/ui/Section";
 import Container from "@/components/layout/Container";
 
 export default function Hero() {
     return (
-        <Section className="bg-linear-to-b from-surface to-white pt-16 pb-8 md:pt-24 md:pb-12">
+        // Sustituimos Section por un div con tus estilos predefinidos
+        <div className="bg-linear-to-b from-surface to-white pt-16 pb-8 md:pt-24 md:pb-12">
             <Container>
                 <div className="flex flex-col items-center text-center gap-6">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary leading-tight tracking-tight whitespace-nowrap">
@@ -17,6 +16,6 @@ export default function Hero() {
                     </p>
                 </div>
             </Container>
-        </Section>
+        </div>
     );
 }

@@ -27,7 +27,6 @@ export default function Footer() {
 
                     {/* COLUMNA CENTRAL: Enlaces en línea + Línea divisoria */}
                     <div className="flex-[2] flex flex-col items-center">
-                        {/* 'flex-nowrap' y 'whitespace-nowrap' aseguran que estén en una sola línea */}
                         <nav className="flex flex-row flex-nowrap items-center gap-x-6 text-[14px] font-medium whitespace-nowrap mb-4">
                             <Link href="/" className="hover:opacity-80 transition-opacity">Inicio</Link>
                             <Link href="/sobre-nosotros" className="hover:opacity-80 transition-opacity">Sobre nosotros</Link>
@@ -39,13 +38,13 @@ export default function Footer() {
                         <div className="w-full max-w-md h-[1.5px] bg-white opacity-90"></div>
                     </div>
 
-                    {/* COLUMNA DERECHA: Contacto y RRSS */}
+                    {/* COLUMNA DERECHA: Contacto (Texto plano) y RRSS */}
                     <div className="flex-1 flex flex-col items-end gap-3">
-                        {/* Bloque de texto contacto */}
+                        {/* Bloque de texto contacto - Sin enlaces */}
                         <div className="flex flex-col items-end gap-1 text-[13px] font-light">
                             <div className="flex items-center gap-2">
                                 <FaPhone className="size-3" />
-                                <span>666666666</span>
+                                <span>666 666 666</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <FaEnvelope className="size-3" />
@@ -53,15 +52,33 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        {/* Iconos de Redes Sociales */}
+                        {/* Iconos de Redes Sociales con enlaces externos */}
                         <div className="flex gap-4">
-                            <a href="#" className="hover:opacity-80 transition-opacity">
+                            <a
+                                href="https://www.instagram.com/solenergeticas_"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:scale-110 transition-transform"
+                                aria-label="Ir a Instagram de Soluciones Energéticas"
+                            >
                                 <FaInstagram className="text-4xl" />
                             </a>
-                            <a href="#" className="hover:opacity-80 transition-opacity">
+                            <a
+                                href="https://www.facebook.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:scale-110 transition-transform"
+                                aria-label="Ir a Facebook"
+                            >
                                 <FaFacebook className="text-4xl" />
                             </a>
-                            <a href="#" className="hover:opacity-80 transition-opacity">
+                            <a
+                                href="https://www.linkedin.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:scale-110 transition-transform"
+                                aria-label="Ir a LinkedIn"
+                            >
                                 <FaLinkedin className="text-4xl" />
                             </a>
                         </div>
@@ -69,8 +86,8 @@ export default function Footer() {
                 </div>
 
                 {/* COPYRIGHT INFERIOR */}
-                <div className="mt-6 text-center text-[11px] font-light tracking-tight opacity-90">
-                    Copyright © 2024 Soluciones Energéticas. Todos los derechos reservados.
+                <div className="mt-6 text-center text-[11px] font-light tracking-tight opacity-90 border-t border-white/10 pt-4">
+                    Copyright © 2026 Soluciones Energéticas. Todos los derechos reservados.
                 </div>
 
             </div>

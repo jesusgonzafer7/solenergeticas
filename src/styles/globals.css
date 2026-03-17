@@ -1,17 +1,10 @@
 /* Importacion del motor de Tailwind CSS v4 */
 @import "tailwindcss";
 
-/* Fuerza el escaneo del directorio src. 
-   Esto es vital en la version 4 si Tailwind no detecta automaticamente tus archivos .tsx 
-*/
 @source "../../src";
 
-/* Configuracion del tema de Tailwind (v4)
-   Aqui vinculamos las variables de CSS puro con las clases de Tailwind.
-   Esto permite usar clases como bg-primary, text-accent, rounded-lg, etc.
-*/
 @theme {
-  /* Colores corporativos y de interfaz */
+  /* Colores corporativos */
   --color-primary: var(--color-primary);
   --color-accent: var(--color-accent);
   --color-light: var(--color-light);
@@ -26,51 +19,48 @@
   --font-sans: var(--font-primary);
   --font-mono: var(--font-mono);
 
-  /* Radios de borde */
+  /* Radios de borde extendidos */
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
+  --radius-3xl: 2.5rem; /* Para el efecto premium del carrusel/form */
 
-  /* Sombras de elevacion */
+  /* Sombras */
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.05);
+
+  /* Animaciones */
+  --animate-slide-up: slideUp 0.6s ease-out forwards;
 }
 
-/* Definicion de variables raiz (Tokens de diseño)
-   Aqui es donde cambias los valores reales (colores, tamaños) 
-   para que se actualicen en toda la web.
-*/
 :root {
-  /* Paleta de colores principal */
   --color-primary: #272A64;
   --color-accent: #316BDB;
   --color-light: #809BCF;
   --color-white: #FFFFFF;
-
-  /* Colores de soporte para la interfaz */
   --color-background: #ffffff;
   --color-surface: #f5f7fc;
   --color-text: #0f172a;
   --color-text-light: #64748b;
   --color-border: #e2e8f0;
 
-  /* Configuracion de fuentes */
   --font-primary: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Medidas de bordes redondeados */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
 
-  /* Definicion de sombras */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Capa Base: Estilos globales para etiquetas HTML.
-   Se encarga de limpiar estilos por defecto y dar coherencia visual.
-*/
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -78,35 +68,29 @@
     padding: 0;
     border-color: var(--color-border);
   }
-
   body {
     font-family: var(--font-primary);
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.5;
-    /* Suavizado de tipografia para navegadores modernos */
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
-
-  /* Configuracion automatica para encabezados */
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--color-primary);
-    font-weight: 700;
-  }
-
-  /* Limpieza de estilos en enlaces */
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+  h1, h2, h3, h4, h5, h6 { color: var(--color-primary); font-weight: 700; }
 }
 
-/* Capa de Componentes: Clases de utilidad complejas reutilizables.
-*/
 @layer components {
-  /* Contenedor estandar para centrar contenido en la pagina */
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Estilos especificos para que el carrusel no falle */
+  .carousel-card {
+    @apply relative overflow-hidden shadow-xl border border-border;
+    border-radius: 2.5rem;
+    height: 500px;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-card { height: 600px; }
   }
 }

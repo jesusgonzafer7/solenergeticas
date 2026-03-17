@@ -54,8 +54,7 @@ export default function Button({
                 variantClasses[variant],
                 sizeClasses[size],
                 // Lógica de ancho
-                fullWidth ? "w-full" : "",
-                // Estado desactivado
+                fullWidth ? "w-full" : "",                 // Estado desactivado
                 disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "cursor-pointer",
                 // Clases externas
                 className,

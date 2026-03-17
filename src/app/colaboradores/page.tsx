@@ -1,12 +1,15 @@
 import PartnersGrid from "@/components/sections/colaboradores/PartnersGrid";
-import PartnerForm from "@/components/sections/colaboradores/PartnerForm";
+import PartnersAccess from "@/components/sections/colaboradores/PartnersAccess";
+import Metrics from "@/components/sections/home/Metrics";
 
 export default function ColaboradoresPage() {
     return (
         <main>
             <h1 className="sr-only">Colaboradores</h1>
+            <PartnersAccess />
             <PartnersGrid />
-            <PartnerForm />
+            <Metrics />
+            
         </main>
     );
 }

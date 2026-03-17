@@ -1,62 +1,79 @@
-"use client"; // Necesario para usar interactividad (useState)
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
+import { CldImage } from 'next-cloudinary';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Función de estilos utilizando tus tokens: primary y accent
+    const getLinkStyles = (href: string, isSpecial: boolean = false) => {
+        const isActive = pathname === href;
+        const baseStyles = "transition-all duration-300 hover:text-accent flex items-center gap-3";
+
+        if (!isSpecial) {
+            return `${baseStyles} ${isActive ? "text-accent font-black" : "text-primary font-bold"}`;
+        }
+        return `${baseStyles} text-primary font-bold group`;
+    };
 
     return (
-        <nav className="w-full bg-background border-b border-border sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        // bg-background y border-border vienen de tu @theme
+        <nav className="w-full bg-background border-b border-border sticky top-0 z-50 shadow-sm">
+            <div className="container-custom h-28 flex items-center justify-between">
 
-                {/* 1. LOGO */}
-                <div className="flex items-center gap-3">
-                    {/* Logo aquí */}
+                {/* LOGO con enlace al inicio */}
+                <div className="flex items-center">
+                    <Link href="/" className="group cursor-pointer">
+                        <CldImage
+                            width="260"
+                            height="80"
+                            src="Group-2-20_nh0md7"
+                            alt="Logo Soluciones Energéticas"
+                            className="object-contain h-16 w-auto transition-transform duration-300 group-hover:scale-105"
+                        />
+                    </Link>
                 </div>
 
-                {/* 2. NAVEGACIÓN DESKTOP (Se oculta en móvil) */}
-                <div className="hidden md:flex items-center gap-8">
-                    <nav className="flex items-center gap-6 text-sm font-medium text-text">
-                        <Link href="/" className="hover:text-accent transition-colors">Inicio</Link>
-                        <Link href="/sobre-nosotros" className="hover:text-accent transition-colors">Sobre nosotros</Link>
-                        <Link href="/colaboradores" className="hover:text-accent transition-colors">Colaboradores</Link>
-                        <Link href="/faqs" className="hover:text-accent transition-colors">FAQs</Link>
-                        <Link href="/contacto" className="hover:text-accent transition-colors">Contáctanos</Link>
+                {/* NAVEGACIÓN DESKTOP */}
+                <div className="hidden md:flex items-center gap-12">
+                    <nav className="flex items-center gap-10 text-lg">
+                        <Link href="/" className={getLinkStyles("/")}>Inicio</Link>
+                        <Link href="/sobre-nosotros" className={getLinkStyles("/sobre-nosotros")}>Sobre nosotros</Link>
+                        <Link href="/colaboradores" className={getLinkStyles("/colaboradores")}>Colaboradores</Link>
+                        <Link href="/faqs" className={getLinkStyles("/faqs")}>FAQs</Link>
+                        <Link href="/contacto" className={getLinkStyles("/contacto")}>Contáctanos</Link>
                     </nav>
 
-                    <div className="h-6 w-[1px] bg-border mx-2"></div>
+                    <div className="h-10 w-[2px] bg-border mx-2"></div>
 
-                    <Link href="/crm" className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent transition-colors">
-                        <FaUserCircle className="text-lg" />
+                    <Link href="/crm" className={getLinkStyles("/crm", true)}>
+                        <FaUserCircle className="text-2xl group-hover:rotate-12 transition-transform" />
                         Acceso CRM
                     </Link>
                 </div>
 
-                {/* 3. BOTÓN MENÚ MÓVIL (Solo visible en móvil) */}
+                {/* BOTÓN MÓVIL */}
                 <div className="md:hidden flex items-center">
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="text-text p-2 transition-colors"
-                        aria-label="Abrir menú"
-                    >
-                        {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+                    <button onClick={() => setIsOpen(!isOpen)} className="text-primary p-3">
+                        {isOpen ? <FaTimes size={32} /> : <FaBars size={32} />}
                     </button>
                 </div>
             </div>
 
-            {/* 4. MENÚ DESPLEGABLE MÓVIL */}
+            {/* MENÚ MÓVIL */}
             {isOpen && (
                 <div className="md:hidden bg-background border-b border-border animate-in fade-in slide-in-from-top-5 duration-300">
-                    <nav className="flex flex-col p-6 gap-4 text-base font-medium text-text">
-                        <Link href="/" onClick={() => setIsOpen(false)} className="hover:text-accent">Inicio</Link>
-                        <Link href="/sobre-nosotros" onClick={() => setIsOpen(false)} className="hover:text-accent">Sobre nosotros</Link>
-                        <Link href="/colaboradores" onClick={() => setIsOpen(false)} className="hover:text-accent">Colaboradores</Link>
-                        <Link href="/faqs" onClick={() => setIsOpen(false)} className="hover:text-accent">FAQs</Link>
-                        <Link href="/contacto" onClick={() => setIsOpen(false)} className="hover:text-accent">Contáctanos</Link>
-                        <hr className="border-border my-2" />
-                        <Link href="/crm" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-primary font-bold">
+                    <nav className="flex flex-col p-10 gap-8 text-xl">
+                        <Link href="/" onClick={() => setIsOpen(false)} className={getLinkStyles("/")}>Inicio</Link>
+                        <Link href="/sobre-nosotros" onClick={() => setIsOpen(false)} className={getLinkStyles("/sobre-nosotros")}>Sobre nosotros</Link>
+                        {/* ... otros links ... */}
+                        <hr className="border-border border-t-2 my-4" />
+                        <Link href="/crm" onClick={() => setIsOpen(false)} className={getLinkStyles("/crm", true) + " text-2xl"}>
                             <FaUserCircle /> Acceso CRM
                         </Link>
                     </nav>

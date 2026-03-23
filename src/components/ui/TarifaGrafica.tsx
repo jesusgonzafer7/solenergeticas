@@ -24,11 +24,11 @@ export default function TarifaComparison() {
             >
 
                 {/* CUADRO 1: GRÁFICA (Replica fiel de la imagen) */}
-                <div className="w-[320px] h-[320px] bg-[#87A2D0] rounded-[3rem] shadow-md flex flex-col pt-8 pb-10 relative overflow-hidden shrink-0">
+                <div className="w-[320px] h-[320px] bg-white rounded-[2rem] shadow-xl border border-accent/20 flex flex-col pt-8 pb-10 relative overflow-hidden shrink-0">
 
                     {/* Título Superior */}
                     <div className="text-center mb-8">
-                        <span className="text-[#1A365D] text-xl font-black leading-tight italic ">
+                        <span className="text-primary text-xl font-black leading-tight italic">
                             Comparativa Real
                         </span>
                     </div>
@@ -36,7 +36,7 @@ export default function TarifaComparison() {
                     {/* Zona de etiquetas sobre la línea */}
                     <div className="relative px-8 z-30">
                         <div className="flex justify-between items-end pb-1">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white">
+                            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-primary/60">
                                 Tarifa Fija
                             </span>
                         </div>
@@ -46,7 +46,7 @@ export default function TarifaComparison() {
                                 hidden: { scaleX: 0 },
                                 visible: { scaleX: 1, transition: { delay: 0.5, duration: 0.8 } }
                             }}
-                            className="h-[1.5px] w-full bg-white origin-left"
+                            className="h-[1.5px] w-full bg-accent/40 origin-left"
                         />
                     </div>
 
@@ -63,39 +63,39 @@ export default function TarifaComparison() {
                                         transition: { duration: 0.8, ease: "easeOut", delay: i * 0.05 }
                                     }
                                 }}
-                                className="flex-1 bg-white rounded-t-sm"
+                                className="flex-1 bg-accent rounded-t-sm"
                             />
                         ))}
                     </div>
 
                     {/* Texto Inferior Centrado */}
                     <div className="mt-4 text-center">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-primary/60">
                             Tarifa Indexada
                         </span>
                     </div>
                 </div>
 
                 {/* CUADRO 2: TEXTOS EXPLICATIVOS */}
-                <div className="w-[320px] h-[320px] bg-[#87A2D0] rounded-[3rem] shadow-md p-10 flex flex-col justify-center border border-white/10 shrink-0">
+                <div className="w-[320px] h-[320px] bg-white rounded-[2rem] shadow-xl border border-accent/20 p-10 flex flex-col justify-center shrink-0">
                     <div className="space-y-8">
-                        {/* Bloque Indexada */}
+                        {/* Bloque Fija */}
                         <div>
-                            <h3 className="text-[#1A365D] text-xl font-black leading-tight italic">
-                                Tarifa Indexada
+                            <h3 className="text-primary text-xl font-black leading-tight italic">
+                                Tarifa Fija
                             </h3>
-                            <p className="text-white text-sm font-medium leading-relaxed mt-2">
-                                Paga la energía a precio de coste real del mercado. Sin márgenes ocultos.
+                            <p className="text-text text-sm font-medium leading-relaxed mt-2">
+                                Un precio estático con sobrecostes de seguridad para la comercializadora.
                             </p>
                         </div>
 
-                        {/* Bloque Fija */}
-                        <div className="pt-6 border-t border-white/20">
-                            <h3 className="text-[#1A365D] text-xl font-black leading-tight italic">
-                                Tarifa Fija
+                        {/* Bloque Indexada */}
+                        <div className="pt-6 border-t border-border">
+                            <h3 className="text-primary text-xl font-black leading-tight italic">
+                                Tarifa Indexada
                             </h3>
-                            <p className="text-white text-sm font-medium leading-relaxed mt-2">
-                                Un precio estático con sobrecostes de seguridad para la comercializadora.
+                            <p className="text-text text-sm font-medium leading-relaxed mt-2">
+                                Paga la energía a precio de coste real del mercado. Sin márgenes ocultos.
                             </p>
                         </div>
                     </div>

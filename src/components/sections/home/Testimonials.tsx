@@ -33,7 +33,7 @@ export default function Testimonials() {
             <Container>
                 <div className="text-center mb-12">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-primary leading-tight tracking-tight">
-                        Lo que dicen <span className="text-accent">nuestros clientes</span>
+                        Las valoraciones de <span className="text-accent">nuestros clientes</span>
                     </h2>
                     <div className="h-1.5 w-20 bg-accent mx-auto mt-4 rounded-full" />
                     <p className="text-muted mt-4 text-base max-w-xl mx-auto">

@@ -7,7 +7,7 @@ import { CldImage } from 'next-cloudinary';
 export default function Footer() {
     return (
         <footer className="w-full bg-accent text-white mt-auto font-sans">
-            <div className="container-custom py-8">
+            <div className="container-custom py-4">
 
                 {/* Distribución principal en 3 columnas */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4">
@@ -61,7 +61,7 @@ export default function Footer() {
                                 className="hover:scale-110 transition-transform"
                                 aria-label="Ir a Instagram de Soluciones Energéticas"
                             >
-                                <FaInstagram className="text-4xl" />
+                                <FaInstagram className="text-2xl" />
                             </a>
                             <a
                                 href="https://www.facebook.com"
@@ -70,7 +70,7 @@ export default function Footer() {
                                 className="hover:scale-110 transition-transform"
                                 aria-label="Ir a Facebook"
                             >
-                                <FaFacebook className="text-4xl" />
+                                <FaFacebook className="text-2xl" />
                             </a>
                             <a
                                 href="https://www.linkedin.com"
@@ -79,14 +79,14 @@ export default function Footer() {
                                 className="hover:scale-110 transition-transform"
                                 aria-label="Ir a LinkedIn"
                             >
-                                <FaLinkedin className="text-4xl" />
+                                <FaLinkedin className="text-2xl" />
                             </a>
                         </div>
                     </div>
                 </div>
 
                 {/* COPYRIGHT INFERIOR */}
-                <div className="mt-6 text-center text-[11px] font-light tracking-tight opacity-90 border-t border-white/10 pt-4">
+                <div className="mt-3 text-center text-[11px] font-light tracking-tight opacity-90 border-t border-white/10 pt-3">
                     Copyright © 2026 Soluciones Energéticas. Todos los derechos reservados.
                 </div>
 

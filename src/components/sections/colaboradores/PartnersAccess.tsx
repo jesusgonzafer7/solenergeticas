@@ -1,5 +1,7 @@
 import Section from "@/components/ui/Section";
 import Container from "@/components/layout/Container";
+import Link from "next/link";
+import Button from "@/components/ui/Button";
 
 export default function PartnersGrid() {
     return (
@@ -16,9 +18,9 @@ export default function PartnersGrid() {
                     </p>
 
                     {/* Botón centrado */}
-                    <button className="px-6 py-3 bg-primary text-white rounded-md hover:bg-accent transition-colors duration-300">
-                        Contáctanos
-                    </button>
+                    <Link href="/nuevoColab">
+                        <Button variant="primary" size="lg">Contáctanos</Button>
+                    </Link>
                 </div>
             </Container>
         </Section>

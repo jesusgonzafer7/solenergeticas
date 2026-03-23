@@ -24,7 +24,7 @@ export default function Navbar() {
     return (
         // bg-background y border-border vienen de tu @theme
         <nav className="w-full bg-background border-b border-border sticky top-0 z-50 shadow-sm">
-            <div className="container-custom h-28 flex items-center justify-between">
+            <div className="container-custom h-22 flex items-center justify-between">
 
                 {/* LOGO con enlace al inicio */}
                 <div className="flex items-center">
@@ -34,14 +34,14 @@ export default function Navbar() {
                             height="80"
                             src="Group-2-20_nh0md7"
                             alt="Logo Soluciones Energéticas"
-                            className="object-contain h-16 w-auto transition-transform duration-300 group-hover:scale-105"
+                            className="object-contain h-13 w-auto transition-transform duration-300 group-hover:scale-105"
                         />
                     </Link>
                 </div>
 
                 {/* NAVEGACIÓN DESKTOP */}
                 <div className="hidden md:flex items-center gap-12">
-                    <nav className="flex items-center gap-10 text-lg">
+                    <nav className="flex items-center gap-8 text-lg">
                         <Link href="/" className={getLinkStyles("/")}>Inicio</Link>
                         <Link href="/sobre-nosotros" className={getLinkStyles("/sobre-nosotros")}>Sobre nosotros</Link>
                         <Link href="/colaboradores" className={getLinkStyles("/colaboradores")}>Colaboradores</Link>
@@ -51,7 +51,7 @@ export default function Navbar() {
 
                     <div className="h-10 w-[2px] bg-border mx-2"></div>
 
-                    <Link href="/crm" className={getLinkStyles("/crm", true)}>
+                    <Link href="https://gestion.solenergeticas.es/" className={getLinkStyles("/crm", true)}>
                         <FaUserCircle className="text-2xl group-hover:rotate-12 transition-transform" />
                         Acceso CRM
                     </Link>

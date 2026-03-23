@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import { CldImage } from "next-cloudinary";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import StyledImageCard from "@/components/ui/StyledImageCard";
 
 const slides = [
     {
@@ -48,17 +48,12 @@ export default function HeroCarousel() {
                         className={`absolute inset-0 z-10 transition-opacity duration-1000 ${index === current ? "opacity-100" : "opacity-0 pointer-events-none"
                             }`}
                     >
-                        {/* OVERLAYS: Filtro azul + Gradiente para legibilidad */}
-                        <div className="absolute inset-0 z-20 bg-primary/20 mix-blend-overlay" />
-                        <div className="absolute inset-0 z-25 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
-
-                        <CldImage
-                            fill
-                            src={slide.image}
+                        {/* Imagen con overlays reutilizando StyledImageCard */}
+                        <StyledImageCard
+                            publicId={slide.image}
                             alt={slide.title}
-                            className={`object-cover transition-transform duration-[10000ms] ease-linear ${index === current ? "scale-110" : "scale-100"
-                                }`}
-                            priority={index === 0}
+                            showGradient={true}
+                            className="absolute inset-0 z-10"
                         />
 
                         {/* TEXTOS ANIMADOS (Estilo antiguo recuperado) */}

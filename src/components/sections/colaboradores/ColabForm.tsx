@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, DragEvent } from "react";
 import { useForm } from "react-hook-form";
 import { Input, Textarea } from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Section from "@/components/ui/Section";
 import Container from "@/components/layout/Container";
+import { FiUploadCloud, FiFile, FiX } from "react-icons/fi";
 
 /* 🔹 Tipado EXACTO según Figma */
 type FormValues = {
@@ -22,38 +23,38 @@ type FormValues = {
 };
 
 export default function CollaboratorForm() {
-    /* 🔹 Estado para feedback del envío (igual que en ContactForm) */
-    const [status, setStatus] = useState<
-        "idle" | "loading" | "success" | "error"
-    >("idle");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    /* 🔹 Configuración de react-hook-form */
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm<FormValues>();
+    const handleFileDrop = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setIsDragging(false);
+        const file = e.dataTransfer.files[0];
+        if (file) setSelectedFile(file);
+    };
 
-    /* 🔹 Función de envío */
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>();
+
     const onSubmit = async (data: FormValues) => {
         setStatus("loading");
-
         try {
-            const res = await fetch("/api/collaborator", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            const fd = new FormData();
+            fd.append("name", data.name);
+            fd.append("surname", data.surname || "");
+            fd.append("company", data.company || "");
+            fd.append("email", data.email);
+            fd.append("phone", data.phone || "");
+            fd.append("activity", data.activity || "");
+            fd.append("region", data.region || "");
+            fd.append("contracts", data.contracts || "");
+            fd.append("message", data.message || "");
+            if (selectedFile) fd.append("file", selectedFile);
 
-                /* 👇 aquí solo enviamos los datos del formulario */
-                body: JSON.stringify(data),
-            });
-
-            if (res.ok) {
-                setStatus("success");
-                reset(); // limpia el formulario
-            } else {
-                setStatus("error");
-            }
+            const res = await fetch("/api/collaborator", { method: "POST", body: fd });
+            if (res.ok) { setStatus("success"); reset(); setSelectedFile(null); }
+            else setStatus("error");
         } catch {
             setStatus("error");
         }
@@ -195,17 +196,35 @@ export default function CollaboratorForm() {
                             />
 
                             {/* 📎 SUBIDA DE CV */}
-                            <div>
-                                <label className="border-2 border-dashed border-border rounded-md p-6 text-center cursor-pointer hover:bg-surface transition block">
-                                    <input
-                                        type="file"
-                                        className="hidden"
-                                        {...register("file")}
-                                    />
-                                    <p className="text-sm text-muted">
-                                        Sube tu CV
-                                    </p>
-                                </label>
+                            <div
+                                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                                onDragLeave={() => setIsDragging(false)}
+                                onDrop={handleFileDrop}
+                                onClick={() => fileInputRef.current?.click()}
+                                className={`border-2 border-dashed rounded-md p-6 text-center cursor-pointer transition ${
+                                    isDragging ? "border-primary bg-primary/5" : "border-border hover:bg-surface"
+                                }`}
+                            >
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    className="hidden"
+                                    onChange={(e) => setSelectedFile(e.target.files?.[0] ?? null)}
+                                />
+                                {selectedFile ? (
+                                    <div className="flex items-center justify-center gap-2 text-sm text-primary font-medium">
+                                        <FiFile />
+                                        <span>{selectedFile.name}</span>
+                                        <button type="button" onClick={(e) => { e.stopPropagation(); setSelectedFile(null); }}>
+                                            <FiX className="text-accent" />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col items-center gap-1 text-sm text-muted">
+                                        <FiUploadCloud className="text-2xl" />
+                                        <p>Sube tu CV (arrastra o haz clic)</p>
+                                    </div>
+                                )}
                             </div>
 
                             {/* 🔵 BOTÓN centrado como en Figma */}

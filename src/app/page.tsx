@@ -7,6 +7,7 @@ import TarifaComparison from "@/components/ui/TarifaGrafica";
 import Container from "@/components/layout/Container";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import TarifasSection from "@/components/sections/home/TarifasSection";
 
 export default function Home() {
     return (

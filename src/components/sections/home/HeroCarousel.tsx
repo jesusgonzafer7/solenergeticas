@@ -32,7 +32,7 @@ export default function HeroCarousel() {
     }, []);
 
     useEffect(() => {
-        const timer = setInterval(nextSlide, 8000); // 8s para que dé tiempo a leer
+        const timer = setInterval(nextSlide, 8000);
         return () => clearInterval(timer);
     }, [nextSlide]);
 
@@ -45,19 +45,17 @@ export default function HeroCarousel() {
                 {slides.map((slide, index) => (
                     <div
                         key={slide.id}
-                        className={`absolute inset-0 z-10 transition-opacity duration-1000 ${index === current ? "opacity-100" : "opacity-0 pointer-events-none"
+                        className={`absolute inset-0 transition-opacity duration-1000 ${index === current ? "opacity-100 z-20" : "opacity-0 z-10 pointer-events-none"
                             }`}
                     >
-                        {/* Imagen con overlays reutilizando StyledImageCard */}
                         <StyledImageCard
                             publicId={slide.image}
                             alt={slide.title}
                             showGradient={true}
-                            className="absolute inset-0 z-10"
+                            className="w-full h-full object-cover"
                         />
 
-                        {/* TEXTOS ANIMADOS (Estilo antiguo recuperado) */}
-                        <div className="relative z-30 h-full flex items-center px-8 md:px-20 lg:px-32">
+                        <div className="absolute inset-0 z-30 flex items-center px-8 md:px-20 lg:px-32 bg-black/20">
                             <div className="max-w-2xl text-left">
                                 <span className={`inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-accent uppercase bg-accent/10 border border-accent/20 rounded-full transition-all duration-700 delay-300 ${index === current ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                                     }`}>
@@ -78,23 +76,23 @@ export default function HeroCarousel() {
                     </div>
                 ))}
 
-                {/* NAVEGACIÓN LATERAL (LUCIDE) */}
+                {/* BOTONES DE NAVEGACIÓN CORREGIDOS */}
                 <button
                     onClick={prevSlide}
-                    className="absolute left-6 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/20 opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:text-primary"
+                    className="absolute left-6 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/20 opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:text-primary"
                 >
                     <ChevronLeft size={24} strokeWidth={2.5} />
                 </button>
 
                 <button
                     onClick={nextSlide}
-                    className="absolute right-6 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/20 opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:text-primary"
+                    className="absolute right-6 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/20 opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:text-primary"
                 >
                     <ChevronRight size={24} strokeWidth={2.5} />
                 </button>
 
                 {/* DOTS INFERIORES */}
-                <div className="absolute bottom-10 left-8 md:left-20 flex gap-4 z-40">
+                <div className="absolute bottom-10 left-8 md:left-20 flex gap-4 z-50">
                     {slides.map((_, index) => (
                         <button
                             key={index}

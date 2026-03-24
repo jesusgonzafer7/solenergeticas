@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, DragEvent } from "react";
 import { useForm } from "react-hook-form";
 import { Input, Textarea } from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Section from "@/components/ui/Section";
 import Container from "@/components/layout/Container";
+import { FiUploadCloud, FiFile, FiX } from "react-icons/fi";
 
 /* 🔹 Tipado del formulario */
 type FormValues = {
@@ -19,44 +20,36 @@ type FormValues = {
 };
 
 export default function ContactForm() {
-    /* 🔹 Estado para feedback del envío */
-    const [status, setStatus] = useState<
-        "idle" | "loading" | "success" | "error"
-    >("idle");
-
-    /* 🔹 Estado del selector (Precio fijo / indexado) */
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [pricingType, setPricingType] = useState<"fixed" | "indexed">("fixed");
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    /* 🔹 Configuración de react-hook-form */
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm<FormValues>();
+    const handleFileDrop = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setIsDragging(false);
+        const file = e.dataTransfer.files[0];
+        if (file) setSelectedFile(file);
+    };
 
-    /* 🔹 Función de envío */
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>();
+
     const onSubmit = async (data: FormValues) => {
         setStatus("loading");
-
         try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            const fd = new FormData();
+            fd.append("name", data.name);
+            fd.append("surname", data.surname || "");
+            fd.append("email", data.email);
+            fd.append("phone", data.phone || "");
+            fd.append("message", data.message || "");
+            fd.append("pricingType", pricingType);
+            if (selectedFile) fd.append("file", selectedFile);
 
-                /* 👇 combinamos datos del form + selector */
-                body: JSON.stringify({
-                    ...data,
-                    pricingType,
-                }),
-            });
-
-            if (res.ok) {
-                setStatus("success");
-                reset(); // limpia formulario
-            } else {
-                setStatus("error");
-            }
+            const res = await fetch("/api/contact", { method: "POST", body: fd });
+            if (res.ok) { setStatus("success"); reset(); setSelectedFile(null); }
+            else setStatus("error");
         } catch {
             setStatus("error");
         }
@@ -249,17 +242,35 @@ export default function ContactForm() {
                             />
 
                             {/* 📎 Upload */}
-                            <div>
-                                <label className="border-2 border-dashed border-border rounded-md p-6 text-center cursor-pointer hover:bg-surface transition block">
-                                    <input
-                                        type="file"
-                                        className="hidden"
-                                        {...register("file")}
-                                    />
-                                    <p className="text-sm text-muted">
-                                        Arrastra tu factura o haz clic para subir
-                                    </p>
-                                </label>
+                            <div
+                                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                                onDragLeave={() => setIsDragging(false)}
+                                onDrop={handleFileDrop}
+                                onClick={() => fileInputRef.current?.click()}
+                                className={`border-2 border-dashed rounded-md p-6 text-center cursor-pointer transition ${
+                                    isDragging ? "border-primary bg-primary/5" : "border-border hover:bg-surface"
+                                }`}
+                            >
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    className="hidden"
+                                    onChange={(e) => setSelectedFile(e.target.files?.[0] ?? null)}
+                                />
+                                {selectedFile ? (
+                                    <div className="flex items-center justify-center gap-2 text-sm text-primary font-medium">
+                                        <FiFile />
+                                        <span>{selectedFile.name}</span>
+                                        <button type="button" onClick={(e) => { e.stopPropagation(); setSelectedFile(null); }}>
+                                            <FiX className="text-accent" />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col items-center gap-1 text-sm text-muted">
+                                        <FiUploadCloud className="text-2xl" />
+                                        <p>Arrastra tu factura o haz clic para subir</p>
+                                    </div>
+                                )}
                             </div>
 
                             {/* ☑️ Checkbox */}

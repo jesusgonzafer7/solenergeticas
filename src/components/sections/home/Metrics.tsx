@@ -2,25 +2,37 @@ import { metrics } from "@/data/metrics";
 import AnimatedNumber from "@/components/ui/AnimatedNumber";
 import Container from "@/components/layout/Container";
 
-export default function Metrics() {
+interface MetricsProps {
+    tipo?: 'inicio' | 'colaboradores';
+}
+
+export default function Metrics({ tipo = 'inicio' }: MetricsProps) {
+    // IMPORTANTE: Ahora el filtro encontrará las categorías
+    const metricsFiltradas = metrics.filter(m => m.category === tipo);
+
     return (
-        /* Cambiamos el fondo a bg-accent (tu azul #316BDB) */
         <section className="py-16 bg-accent">
             <Container>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    {metrics.map((metric, index) => (
+                    {metricsFiltradas.map((metric, index) => (
                         <div key={index} className="flex flex-col items-center text-center">
+                            <span className="text-4xl md:text-5xl font-black text-white mb-2 italic">
+                                <span className="flex items-baseline">
+                                    {/* Símbolos inteligentes según el texto */}
+                                    {(metric.label.includes("Instalaciones") || metric.label.includes("Colaboradores")) && "+"}
 
-                            {/* Los números ahora en BLANCO para resaltar sobre el azul */}
-                            <span className="text-4xl md:text-5xl font-black text-white mb-2">
-                                <AnimatedNumber value={metric.value} />
+                                    <AnimatedNumber value={metric.value} />
+
+                                    {metric.label.includes("satisfechos") && "%"}
+                                    {metric.label.includes("experiencia") && "+"}
+                                    {metric.label.includes("kWh") && "M"}
+                                    {metric.label.includes("técnico") && "/7"}
+                                </span>
                             </span>
 
-                            {/* Las etiquetas también en BLANCO (u opacidad suave) */}
-                            <span className="text-sm md:text-base font-bold text-white/90 uppercase tracking-wide">
+                            <span className="text-sm md:text-base font-bold text-white/90 uppercase tracking-widest leading-tight">
                                 {metric.label}
                             </span>
-
                         </div>
                     ))}
                 </div>

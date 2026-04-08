@@ -1,7 +1,14 @@
 import nodemailer from "nodemailer";
 
+const smtpHost = process.env.SMTP_HOST;
+if (!smtpHost) {
+    throw new Error(
+        "❌ SMTP_HOST no está definido. Asegúrate de configurar las variables de entorno SMTP_HOST, SMTP_PORT, SMTP_USER y SMTP_PASS."
+    );
+}
+
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
+    host: smtpHost,
     port: Number(process.env.SMTP_PORT) || 587,
     secure: false,
     auth: {
@@ -9,7 +16,7 @@ const transporter = nodemailer.createTransport({
         pass: process.env.SMTP_PASS,
     },
     tls: { rejectUnauthorized: false },
-    family: 4, // Forzar IPv4 para evitar ECONNREFUSED en Node.js 18+
+    family: 4,
 } as Parameters<typeof nodemailer.createTransport>[0]);
 
 // ─── Formulario de Contacto ───────────────────────────────────────────────────

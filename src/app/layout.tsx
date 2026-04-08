@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+
 
 const geistSans = Geist({
     /* Se vincula la fuente a la variable definida en la configuracion */

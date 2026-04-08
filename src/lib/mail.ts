@@ -9,7 +9,8 @@ const transporter = nodemailer.createTransport({
         pass: process.env.SMTP_PASS,
     },
     tls: { rejectUnauthorized: false },
-});
+    family: 4, // Forzar IPv4 para evitar ECONNREFUSED en Node.js 18+
+} as Parameters<typeof nodemailer.createTransport>[0]);
 
 // ─── Formulario de Contacto ───────────────────────────────────────────────────
 
